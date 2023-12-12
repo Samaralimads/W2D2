@@ -69,6 +69,13 @@ const newerWizards = wizards.map((oneWizard) => {
 
 console.log(newerWizards)
 
+/**
+ * You might want to try to implement our own version of filter
+ * Just to have a better understanding of how it works under the hood
+ * @param {Array} array
+ * @param {string} lastName
+ * @returns
+ */
 function filterByLastName(array, lastName) {
 	const lastNameAsRegeExp = new RegExp(lastName, "gi")
 	const filteredWizards = array.filter((oneElement) => {
@@ -109,3 +116,57 @@ function sortByLastName(array) {
 }
 
 sortByLastName(newerWizards)
+
+/**
+ * Reduce
+ *
+ */
+
+const arrOfNums = [5, 92, 45, -20, 13]
+/**
+ * Array.reduce((acc, val) => {}, 0)
+ */
+
+const total = arrOfNums.reduce((acc, val) => {
+	return acc + val
+	/**
+   
+  iteration 0
+  acc : 0
+  val : 5
+  => acc + val -> 5
+  Iteration 1
+  acc: 5
+  val: 92
+  => acc + val -> 97
+  Iteration 2
+  acc: 97
+  val: 45
+  => acc + val -> 142
+  ITeration 3
+  acc: 142
+  val: -20
+  => acc + val -> 122
+   */
+}, 0)
+
+const sum = arrOfNums.reduce((acc, val) => acc + val, 0)
+const totalAge = newerWizards.reduce((acc, val) => acc + val.age, 0)
+console.log(totalAge)
+console.log(totalAge / newerWizards.length)
+
+/**
+ * {
+ *  "Weasley": ['Ron', 'Fred', ...]
+ * }
+ */
+
+const objectByLastName = newerWizards.reduce((acc, val) => {
+	if (acc[val.lastName]) {
+		acc[val.lastName].push(val.firstName)
+	} else {
+		acc[val.lastName] = [val.firstName]
+	}
+	console.log(acc)
+	return acc
+}, {})
